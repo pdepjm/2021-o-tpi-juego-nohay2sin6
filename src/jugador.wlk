@@ -20,14 +20,14 @@ object jugador{
 			disparo.mover(disparo) 
 	}
 	
-	/*method impactarDisparo() {
+	method impactarDisparo() {
 		if(disparo != null && game.hasVisual(disparo)){
 			game.whenCollideDo(disparo, { enemigo => 
 				juego.eliminarEnemigo(enemigo)
 				disparo.salirDeEscena()			
 				})		
 		}	
-	}*/
+	}
 	
 	method validarMovimientoHorizontal(){
 		if (position.y() > 0) 
