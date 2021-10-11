@@ -1,0 +1,16 @@
+import pantallaInicial.*
+import finDeJuego.*
+import enemigos.*
+import jugador.*
+import wollok.game.*
+
+program game{
+	game.width(14)
+	game.height(14)
+	game.boardGround("space.gif")
+	game.title("Space Invader")
+
+	pantallaInicial.cargar()
+	game.start()
+	
+}
