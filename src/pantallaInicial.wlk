@@ -1,6 +1,6 @@
 import wollok.game.*
 import juego.*
-import interfaz.*
+import cartelNivel.*
 
 object pantallaInicial {
 	
@@ -10,5 +10,10 @@ object pantallaInicial {
 	method cargar(){
 		game.addVisual(self)	
 	
+		keyboard.enter().onPressDo {
+			game.clear()
+			//game.addVisual(new Level("level1.png"))
+			game.onTick(500, "comenzar",{ juego.comenzar() })	
+		}
 	}
 }
