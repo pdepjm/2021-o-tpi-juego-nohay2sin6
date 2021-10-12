@@ -5,7 +5,7 @@ import juego.*
 import cartelNivel.*
 
 class Nivel {
-	var property dificultad
+	var property dificultad = 0
 	var property enemigos1 = []
 	var property enemigos2 = []
 	var property enemigos3 = []
