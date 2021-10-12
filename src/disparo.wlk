@@ -27,7 +27,11 @@ class DisparoJugador inherits Disparo{
 	
 	override method mover(disparo) { 
 		if(game.hasVisual(disparo)){
-			position = position.up(1)	
+			position = position.up(1)
+			if (image.equals("shot1.gif"))
+				image = "shot2.gif"
+					else
+						image = "shot1.gif"
 		}
 	}
 	
@@ -35,7 +39,7 @@ class DisparoJugador inherits Disparo{
 
 }
 
-/*class DisparoEnemigo inherits Disparo{ 
+class DisparoEnemigo inherits Disparo{ 
 	
 	override method mover(disparo) {
 		position = position.down(1)	
@@ -43,4 +47,4 @@ class DisparoJugador inherits Disparo{
 	
 	override method fueraDeEscena() = position.y() < 0
 
-}*/
+}

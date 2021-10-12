@@ -8,7 +8,7 @@ program game{
 	game.width(14)
 	game.height(14)
 	game.boardGround("space.gif")
-	game.title("Space Invader")
+	game.title("Space Invaders")
 
 	pantallaInicial.cargar()
 	game.start()
