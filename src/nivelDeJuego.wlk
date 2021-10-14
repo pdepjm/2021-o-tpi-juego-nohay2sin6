@@ -79,6 +79,10 @@ object nivelUno inherits Nivel{
 		finDeJuego.cargar()
 	}	
 	
+	method unEnemigo(){
+		return enemigos1.anyOne()
+	}
+	
 
 }
 
