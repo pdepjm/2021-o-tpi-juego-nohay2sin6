@@ -19,8 +19,12 @@ object finDeJuego{
 		keyboard.r().onPressDo {
 			game.clear()
 			game.addVisual(new CartelNivel(image = "level1.png"))
-			game.onTick(500, "comenzar",{ juego.restart() })			
+			game.onTick(500, "comenzar",{ juego.restart() })
+			
 		}
+		
+		
+		
 		
 	}
 }

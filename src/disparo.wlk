@@ -8,6 +8,10 @@ class Disparo{
 		position = posicion
 	}
 	
+	method posicion(){
+		return position
+	}
+	
 	method validar() {
 		if (self.fueraDeEscena())
 			game.removeVisual(self)

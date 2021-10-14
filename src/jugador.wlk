@@ -9,11 +9,21 @@ object jugador{
 	
 	method disparar() {
 		if(disparo == null || !game.hasVisual(disparo)){
-			game.sound("disparo.wav").play()
+			/*game.sound("disparo.wav").play()*/
 			disparo = new DisparoJugador(position = position.up(1), image = "shot1.gif")			
 			game.addVisual(disparo)		
 		}	  
 	}
+	
+	method disparo(){
+		return disparo
+	}
+	
+	method posicion(){
+		return position
+	}
+	
+	
 	
 	method moverDisparo() {
 		if(disparo != null && game.hasVisual(disparo))

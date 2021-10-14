@@ -1,6 +1,78 @@
+import disparo.*
+import jugador.*
+import enemigos.*
+import juego.*
+import wollok.game.*
 
-test "testX" {
+describe "Jugador" {
+	
+	
+	method initialize(){
+	 juego.comenzar()
+	}
+	
+	
+	test "El jugador esta en la pantalla"{
+		assert.that(game.hasVisual(jugador))
+	}
+	
+	
+	test "El jugador dispara"{
+		jugador.disparar()
+		assert.that(game.hasVisual(jugador.disparo()))
+		
+	}
+		
+	
+}
 
-	assert.that(true)
+describe "Disparo" {
+	
+	
+	method initialize(){
+	 juego.comenzar()
+	 
+	}
+	
+	
+	test "El disparo del jugador se dirije hacia los enemigos"{
+		jugador.disparar()
+		(jugador.disparo()).mover(jugador.disparo())
+		assert.that(((jugador.disparo()).posicion()).y() > 0)
+	}
+	
+	
+	test "El disparo del enemigo va hacia el jugador"{
+	var enemigo = new Enemigo1 (position = game.at(1,9), image = "invader1.gif", posicionDerecha = 2, posicionIzquierda = 1)
+	enemigo.disparar()
+	(enemigo.disparo()).mover(enemigo.disparo())
+	assert.that(((enemigo.disparo()).posicion()).y() < 9)
+		
+	}
+		
+	
+}
 
+
+
+describe "Enemigo" {
+	
+	
+	method initialize(){
+	 juego.comenzar()
+	}
+	
+	
+	test "El enemigo esta en la pantalla"{
+	var enemigo = new Enemigo1 (position = game.at(1,9), image = "invader1.gif", posicionDerecha = 2, posicionIzquierda = 1)
+	assert.that(game.hasVisual(enemigo))
+	}
+	
+	
+	test "El enemigo dispara"{
+		
+		
+	}
+		
+	
 }

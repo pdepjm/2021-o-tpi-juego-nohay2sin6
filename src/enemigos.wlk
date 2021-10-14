@@ -16,6 +16,9 @@ class Enemigo{
 		}	
 	}
 	
+	method disparo(){
+		return disparo
+	}
 	method moverDisparo() {
 		if(game.hasVisual(disparo))
 			disparo.mover(disparo) 
