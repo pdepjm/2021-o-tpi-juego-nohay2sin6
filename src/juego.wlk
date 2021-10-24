@@ -18,7 +18,7 @@ object juego {
 		
 		game.onTick(0, "moverDisparo",{ jugador.moverDisparo() })
 		self.teclasJugador()
-	    self.impactoEnJugador()
+		self.impactoEnJugador()
 	}
 	
 	method impactoEnJugador() {

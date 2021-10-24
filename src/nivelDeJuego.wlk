@@ -23,12 +23,12 @@ class Nivel {
 	}
 	
 	method disparosEnemigos() {
-		self.dispararEnemigos(1000)
-		self.dispararEnemigos(2500)
-		self.dispararEnemigos(7500)
+		self.dispararEnemigo(1000)
+		self.dispararEnemigo(2500)
+		self.dispararEnemigo(7500)
 	}
 	
-	method dispararEnemigos(tiempo) {
+	method dispararEnemigo(tiempo) {
 		game.onTick(tiempo, "disparar",{ 
 			if(!enemigos.isEmpty()){
 				enemigos.anyOne().disparar()
