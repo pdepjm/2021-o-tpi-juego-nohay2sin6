@@ -6,14 +6,11 @@ import cartelNivel.*
 
 class Nivel {
 	var property dificultad = 0
-	var property enemigos1 = []
-	var property enemigos2 = []
-	var property enemigos3 = []
+	var property enemigos = []
 	
-	method todosLosEnemigos() = enemigos1 + enemigos2 + enemigos3
 	
 	method cargarEnemigos() {
-		self.todosLosEnemigos().forEach { 
+		enemigos.forEach { 
 			enemigo => game.addVisual(enemigo) 
 			game.onTick(dificultad, "mover",{ enemigo.mover() })
 			game.onTick(500, "moverDisparo",{ enemigo.moverDisparo() })
@@ -22,33 +19,25 @@ class Nivel {
 	}
 	
 	method removerEnemigo(enemigo) {
-			enemigos1.remove(enemigo)
-			enemigos2.remove(enemigo)
-			enemigos3.remove(enemigo)
+			enemigos.remove(enemigo)
 	}
 	
-	method cargarTiemposDeDisparo() {
-		game.onTick(7000, "disparar",{ 
-			if(!enemigos1.isEmpty()){
-				enemigos1.anyOne().disparar()
+	method disparosEnemigos() {
+		self.dispararEnemigos(1000)
+		self.dispararEnemigos(2500)
+		self.dispararEnemigos(7500)
+	}
+	
+	method dispararEnemigos(tiempo) {
+		game.onTick(tiempo, "disparar",{ 
+			if(!enemigos.isEmpty()){
+				enemigos.anyOne().disparar()
 			}
 		})
-		game.onTick(5000, "disparar",{ 
-			if(!enemigos2.isEmpty()){
-				enemigos2.anyOne().disparar()
-			}
-		})
-		game.onTick(2500, "disparar",{ 
-			if(!enemigos3.isEmpty()){
-				enemigos3.anyOne().disparar()
-			}
-		})		
 	}
 	
 	method restart(){
-		enemigos1 = []
-		enemigos2 = []
-		enemigos3 = []		
+		enemigos = []	
 	}
 	
 	method aumentarDificultad()
@@ -63,9 +52,9 @@ object nivelUno inherits Nivel{
 		dificultad = 8000
 		
 		11.times({i => 
-			enemigos1.add(new Enemigo1 (position = game.at(i+1,9), image = "invader1.gif", posicionDerecha = i+2, posicionIzquierda = i))
-			enemigos2.add(new Enemigo2 (position = game.at(i+1,10), image = "invader3.gif", posicionDerecha = i+2, posicionIzquierda = i))
-			enemigos3.add(new Enemigo3 (position = game.at(i+1,11), image = "ufo0.gif", posicionDerecha = i+2, posicionIzquierda = i))
+			enemigos.add(new Enemigo1 (position = game.at(i+1,9), image = "invader1.gif", posicionDerecha = i+2, posicionIzquierda = i, puntos = 50))
+			enemigos.add(new Enemigo2 (position = game.at(i+1,10), image = "invader3.gif", posicionDerecha = i+2, posicionIzquierda = i, puntos = 100))
+			enemigos.add(new Enemigo3 (position = game.at(i+1,11), image = "ufo1.gif", posicionDerecha = i+2, posicionIzquierda = i, puntos = 150))
 		})
 		super()
 
@@ -76,15 +65,91 @@ object nivelUno inherits Nivel{
 	}
 	
 	override method completar(){
-		finDeJuego.cargar()
+		game.clear()
+		game.addVisual(new CartelNivel(image = "level2.png"))
+		game.schedule(500,{ 
+			juego.nivel(nivelDos)			
+			juego.comenzar()
+		})	
 	}	
-	
-	method unEnemigo(){
-		return enemigos1.anyOne()
-	}
-	
 
 }
 
-// object nivelDos inherits Nivel
-// object nivelTres inherits Nivel
+object nivelDos inherits Nivel{
+
+	
+	override method cargarEnemigos() {
+		dificultad = 2000
+		
+		7.times({i => 
+			enemigos.add(new Enemigo1 (position = game.at(i+3,6), image = "invader1.gif", posicionDerecha = i+4, posicionIzquierda = i+2, puntos = 50))
+			enemigos.add(new Enemigo2 (position = game.at(i+3,7), image = "invader3.gif", posicionDerecha = i+4, posicionIzquierda = i+2, puntos = 100))
+			enemigos.add(new Enemigo3 (position = game.at(i+3,8), image = "ufo1.gif", posicionDerecha = i+4, posicionIzquierda = i+2, puntos = 150))
+		})
+		super()
+
+	}
+	
+	override method aumentarDificultad() {
+		dificultad = 1000
+	}
+		
+	override method completar(){
+		game.clear()
+		game.addVisual(new CartelNivel(image = "level3.png"))
+		game.schedule(500,{ 
+			juego.nivel(nivelTres)			
+			juego.comenzar()
+		})	
+	}	
+}
+
+object nivelTres inherits Nivel{
+
+	
+	override method cargarEnemigos() {
+		dificultad = 10000
+		
+		4.times({i =>
+			enemigos.add(new Enemigo1 (position = game.at(2,14-i), image = "invader1.gif", posicionDerecha = 3, posicionIzquierda = 1, puntos = 50))
+			enemigos.add(new Enemigo3 (position = game.at(6,14-i), image = "ufo1.gif", posicionDerecha = 7, posicionIzquierda = 5, puntos = 150))
+			enemigos.add(new Enemigo2 (position = game.at(10,14-i), image = "invader3.gif", posicionDerecha = 11, posicionIzquierda = 9, puntos = 100))
+			enemigos.add(new Enemigo3 (position = game.at(5,9-i), image = "ufo1.gif", posicionDerecha = 6, posicionIzquierda = 4, puntos = 150))
+			enemigos.add(new Enemigo3 (position = game.at(7,9-i), image = "ufo1.gif", posicionDerecha = 8, posicionIzquierda = 6, puntos = 150))
+			enemigos.add(new Enemigo3 (position = game.at(13,9-i), image = "ufo1.gif", posicionDerecha = 14, posicionIzquierda = 12, puntos = 150))
+		})
+		3.times({i =>
+			enemigos.add(new Enemigo1 (position = game.at(4,14-i), image = "invader1.gif", posicionDerecha = 5, posicionIzquierda = 3, puntos = 50))
+			enemigos.add(new Enemigo2 (position = game.at(12,14-i), image = "invader3.gif", posicionDerecha = 13, posicionIzquierda = 11, puntos = 100))
+		})
+		2.times({i =>
+			enemigos.add(new Enemigo1 (position = game.at(3,15-2*i), image = "invader1.gif", posicionDerecha = 4, posicionIzquierda = 2, puntos = 50))
+			enemigos.add(new Enemigo3 (position = game.at(7,16-3*i), image = "ufo1.gif", posicionDerecha = 8, posicionIzquierda = 6, puntos = 150))
+			enemigos.add(new Enemigo2 (position = game.at(11,15-2*i), image = "invader3.gif", posicionDerecha = 12, posicionIzquierda = 10, puntos = 100))
+			enemigos.add(new Enemigo3 (position = game.at(8,13-i), image = "ufo1.gif", posicionDerecha = 9, posicionIzquierda = 7, puntos = 150))
+			enemigos.add(new Enemigo1 (position = game.at(1,7-i), image = "invader1.gif", posicionDerecha = 2, posicionIzquierda = 0, puntos = 50))
+			enemigos.add(new Enemigo1 (position = game.at(2,9-i), image = "invader1.gif", posicionDerecha = 3, posicionIzquierda = 1, puntos = 50))
+			enemigos.add(new Enemigo1 (position = game.at(3,11-3*i), image = "invader1.gif", posicionDerecha = 4, posicionIzquierda = 2, puntos = 50))
+			enemigos.add(new Enemigo3 (position = game.at(6,11-3*i), image = "ufo1.gif", posicionDerecha = 7, posicionIzquierda = 5, puntos = 150))
+			enemigos.add(new Enemigo2 (position = game.at(9,7-i), image = "invader3.gif", posicionDerecha = 10, posicionIzquierda = 8, puntos = 100))
+			enemigos.add(new Enemigo2 (position = game.at(10,9-i), image = "invader3.gif", posicionDerecha = 11, posicionIzquierda = 9, puntos = 100))
+			enemigos.add(new Enemigo2 (position = game.at(11,11-3*i), image = "invader3.gif", posicionDerecha = 12, posicionIzquierda = 10, puntos = 100))
+		})
+		enemigos.add(new Enemigo1 (position = game.at(1,8), image = "invader1.gif", posicionDerecha = 2, posicionIzquierda = 0, puntos = 50))
+		enemigos.add(new Enemigo1 (position = game.at(2,5), image = "invader1.gif", posicionDerecha = 3, posicionIzquierda = 1, puntos = 50))
+		enemigos.add(new Enemigo2 (position = game.at(9,8), image = "invader3.gif", posicionDerecha = 10, posicionIzquierda = 8, puntos = 100))
+		enemigos.add(new Enemigo2 (position = game.at(10,5), image = "invader3.gif", posicionDerecha = 11, posicionIzquierda = 9, puntos = 100))
+		
+		super()
+
+	}
+	
+	override method aumentarDificultad() {
+		dificultad = 500
+	}
+	
+	override method completar(){
+		finDeJuego.cargar()
+	}	
+
+}

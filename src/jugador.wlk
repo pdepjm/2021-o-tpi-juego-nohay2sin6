@@ -9,7 +9,7 @@ object jugador{
 	
 	method disparar() {
 		if(disparo == null || !game.hasVisual(disparo)){
-			/*game.sound("disparo.wav").play()*/
+			game.sound("disparo.wav").play()
 			disparo = new DisparoJugador(position = position.up(1), image = "shot1.gif")			
 			game.addVisual(disparo)		
 		}	  
@@ -23,11 +23,24 @@ object jugador{
 		return position
 	}
 	
+	method moverPara(direccion) {
+		position = direccion.proximaPosicion(position)
+		self.validarMovimientoLateral() 
+	}
 	
+	method validarMovimientoLateral() {
+		if(position.x() < 0 ){
+			position = game.at(0,position.y())
+		}else if(position.x() > 13 ){
+			position = game.at(13,position.y())
+		}
+	}
 	
 	method moverDisparo() {
 		if(disparo != null && game.hasVisual(disparo))
-			disparo.mover(disparo) 
+			disparo.mover(disparo)
+			self.impactarDisparo()
+			self.validarDisparo() 
 	}
 	
 	method impactarDisparo() {
@@ -37,11 +50,6 @@ object jugador{
 				disparo.salirDeEscena()			
 				})		
 		}	
-	}
-	
-	method validarMovimientoHorizontal(){
-		if (position.y() > 0) 
-			position = game.at(position.x(),0)  
 	}
 	
 	method validarDisparo() {

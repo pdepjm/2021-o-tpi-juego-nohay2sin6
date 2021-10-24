@@ -13,7 +13,7 @@ object pantallaInicial {
 		keyboard.enter().onPressDo {
 			game.clear()
 			game.addVisual(new CartelNivel(image = "level1.png"))
-			game.onTick(500, "comenzar",{ juego.comenzar() })	
+			game.schedule(500,{ juego.comenzar() })	
 		}
 	}
 }

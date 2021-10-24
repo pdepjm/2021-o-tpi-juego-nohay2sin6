@@ -12,14 +12,12 @@ object finDeJuego{
 		game.addVisual(self)	
 		game.addVisual(jugador)
 	
-		game.onTick(0, "puntuación",{
-			game.say(jugador, "Tu puntuación es: " + juego.puntuacion())
-		})
+		game.say(jugador, "Tu puntuación es: " + juego.puntuacion())
 		
 		keyboard.r().onPressDo {
 			game.clear()
 			game.addVisual(new CartelNivel(image = "level1.png"))
-			game.onTick(500, "comenzar",{ juego.restart() })
+			game.schedule(500,{ juego.restart() })
 			
 		}
 		

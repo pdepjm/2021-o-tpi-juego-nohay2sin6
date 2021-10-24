@@ -3,6 +3,7 @@ import finDeJuego.*
 import enemigos.*
 import wollok.game.* 
 import jugador.*
+import direcciones.*
 
 object juego {
 	var property puntuacion = 0
@@ -10,50 +11,44 @@ object juego {
 	
 	method comenzar() {
 		game.clear()
-		game.addVisualCharacter(jugador)
+		game.addVisual(jugador)
 		
 		nivel.cargarEnemigos()
-		self.validarFinal()
-		self.validarDificultad()
-
-		nivel.cargarTiemposDeDisparo()		
-		game.onTick(0, "validar",{ jugador.validarMovimientoHorizontal() }) 
-		game.onTick(0, "impactar",{ jugador.impactarDisparo() })
-  
+		nivel.disparosEnemigos()		 
+		
 		game.onTick(0, "moverDisparo",{ jugador.moverDisparo() })
-		game.onTick(0, "validarDisparo",{ jugador.validarDisparo()})
-	    
-		keyboard.space().onPressDo { 
-			jugador.disparar()
-		}
-	   
+		self.teclasJugador()
+	    self.impactoEnJugador()
+	}
+	
+	method impactoEnJugador() {
 		game.whenCollideDo(jugador, { enemigoODisparoEnemigo => 
 			game.sound("explosion.wav").play()
 			finDeJuego.cargar()
 		})	
-
+	}
+	
+	method teclasJugador(){
+		keyboard.space().onPressDo({ jugador.disparar() }) 
+		keyboard.left().onPressDo({ jugador.moverPara(izquierda) })
+		keyboard.right().onPressDo({ jugador.moverPara(derecha) })
 	}
 	
 	method eliminarEnemigo(enemigo){
-		if(nivel.todosLosEnemigos().contains(enemigo)){
+		if(nivel.enemigos().contains(enemigo)){
 			game.sound("explosion.wav").play()
 			puntuacion += enemigo.puntos()
 			nivel.removerEnemigo(enemigo)
 		}
 		game.removeVisual(enemigo)
+		self.validarVictoria()
+		self.validarDificultad()
 	}
 	
-	method validarFinal() {	
-		game.onTick(0, "ganar",{ 
-			if(nivel.todosLosEnemigos().isEmpty()){
-				nivel.completar()			
-			}
-		})	
-		game.onTick(0, "perder",{ 
-			if(nivel.todosLosEnemigos().any({enemigo => enemigo.victoria()})){
-				finDeJuego.cargar()
-			}
-		})	
+	method validarVictoria() {	
+		 if(nivel.enemigos().isEmpty()){
+				nivel.completar()	
+		}			
 	}
 	
 	method restart() {
@@ -64,10 +59,8 @@ object juego {
 	}
 	
 	method validarDificultad() {
-		game.onTick(500, "dificultad",{ 
-			if(nivel.todosLosEnemigos().size() < 10){
+		 if(nivel.enemigos().size() < 10){
 				nivel.aumentarDificultad()
-			}
-		})	
+		}	
 	}
 }
