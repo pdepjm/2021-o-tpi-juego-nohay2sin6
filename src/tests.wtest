@@ -13,8 +13,12 @@ describe "Jugador" {
 	}
 	
 	
-	test "El jugador esta en la pantalla"{
-		assert.that(game.hasVisual(jugador))
+	test "El jugador dispara a un enemigo y aumenta su puntuacion"{
+		const enemigo = new Enemigo1(position = game.at(5,9),posicionIzquierda = 5, posicionDerecha = 9, image = "invader1.gif", puntos = 100)
+		game.addVisual(enemigo)
+		jugador.disparar()
+		juego.eliminarEnemigo(enemigo)
+		assert.equals(100,juego.puntuacion())
 	}
 	
 	
@@ -36,17 +40,20 @@ describe "Disparo" {
 	}
 	
 	
-	test "El disparo del jugador se dirije hacia los enemigos"{
-		jugador.disparar()
-		(jugador.disparo()).mover(jugador.disparo())
-		assert.that(((jugador.disparo()).posicion()).y() > 0)
+	test "El disparo sale de escena al pasar los limites"{
+		const disparo = new DisparoJugador(position = 13 , image = "shot1.gif")
+		game.addVisual(disparo)
+		disparo.mover(disparo)
+		assert.that(!game.hasVisual(disparo))
 	}
 	
 	
-	test "El disparo del enemigo va hacia el jugador"{
-	(nivelUno.unEnemigo()).disparar()
-	((nivelUno.unEnemigo()).disparo()).mover((nivelUno.unEnemigo()).disparo())
-	assert.that((((nivelUno.unEnemigo()).disparo()).posicion()).y() < 10)
+	test "El disparo al impactar un enemigo sale de escena"{
+       const enemigo = new Enemigo1(position = game.at(6,1),posicionIzquierda = 5, posicionDerecha = 9, image = "invader1.gif", puntos = 100)
+       game.addVisual(enemigo)
+       jugador.disparar()
+       jugador.impactarDisparo()
+       assert.that(!game.hasVisual(jugador.disparo()))       
 		
 	}
 		
@@ -73,6 +80,15 @@ describe "Enemigo" {
 	  (nivelUno.unEnemigo()).disparar()
 	  assert.that(game.hasVisual((nivelUno.unEnemigo()).disparo()))
 	}
+	
+	test "El enemigo al recibir un disparo desparece"{
+	   const enemigo = new Enemigo1(position = game.at(6,1),posicionIzquierda = 5, posicionDerecha = 9, image = "invader1.gif", puntos = 100)
+       game.addVisual(enemigo)
+       jugador.disparar()
+       jugador.impactarDisparo()
+       assert.that(!game.hasVisual(enemigo))
+	}
+	
 		
 	
 }

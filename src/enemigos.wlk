@@ -55,6 +55,8 @@ class Enemigo1 inherits Enemigo{
 			image = "invader1.gif"			
 		} 
 	} 
+	
+	
 }
 
 class Enemigo2 inherits Enemigo{
@@ -66,6 +68,7 @@ class Enemigo2 inherits Enemigo{
 			image = "invader3.gif"			
 		} 
 	} 
+	
 }
 
 class Enemigo3 inherits Enemigo{
