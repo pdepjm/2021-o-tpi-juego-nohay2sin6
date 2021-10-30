@@ -14,8 +14,11 @@ class Nivel {
 			enemigo => game.addVisual(enemigo) 
 			game.onTick(dificultad, "mover",{ enemigo.mover() })
 			game.onTick(500, "moverDisparo",{ enemigo.moverDisparo() })
-			game.onTick(500, "validarDisparo",{ enemigo.validarDisparo() })
 		}	
+	}
+	
+	method combatir(){
+		enemigos.anyOne().alCombate()
 	}
 	
 	method removerEnemigo(enemigo) {

@@ -22,7 +22,8 @@ class Enemigo{
 	}
 	method moverDisparo() {
 		if(game.hasVisual(disparo))
-			disparo.mover(disparo) 
+			disparo.mover(disparo)
+			self.validarDisparo() 
 	}
 	
 	method validarDisparo() {
@@ -38,46 +39,42 @@ class Enemigo{
 			else{		
 				position = position.down(1)
 			}
-		self.cambiarImagen()
 	}
 	
-	method cambiarImagen()
-	
-	method victoria() = position.y() == 0
+	method alCombate()
 }
 
 class Enemigo1 inherits Enemigo{
 	
-	override method cambiarImagen() {
-		if (image.equals("invader1.gif")) 
-			image = "invader2.gif"			
-		else{		
-			image = "invader1.gif"			
-		} 
-	} 
+	const mensajes = ["¡ A LA CARGA !", "¡ MORIRAS !", "¡ RINDETE !"]
+	
+	override method alCombate(){
+		game.say(self, mensajes.anyOne())
+	}
 	
 	
 }
 
 class Enemigo2 inherits Enemigo{
 	
-	override method cambiarImagen() {
-		if (image.equals("invader3.gif")) 
-			image = "invader4.gif"			
-		else{		
-			image = "invader3.gif"			
-		} 
-	} 
+	const comunicaciones = ["voz1.wav", "voz2.wav", "voz3.wav", "voz4.wav"]
 	
+	override method alCombate(){
+		game.sound(comunicaciones.anyOne()).play()
+		game.say(self, "?#%)?!3#@:=?$")
+	}
+
 }
 
 class Enemigo3 inherits Enemigo{
 	
-	override method cambiarImagen() {
+	override method alCombate() {
 		if (image.equals("ufo1.gif")) 
-			image = "ufo2.gif"			
+			image = "ufo2.png"			
 		else{		
 			image = "ufo1.gif"			
-		} 
+		}
+		game.sound("transformacion.wav").play()
 	} 
+
 }

@@ -32,16 +32,4 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>assets/epicwin.png</name>
-			<type>1</type>
-			<location>C:/Users/Lucas/Downloads/epicwin.png</location>
-		</link>
-		<link>
-			<name>assets/gameoverphrase.png</name>
-			<type>1</type>
-			<location>C:/Users/Lucas/Downloads/gameoverphrase.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>

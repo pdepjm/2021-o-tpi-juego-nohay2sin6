@@ -1,4 +1,4 @@
-import disparo.*
+/*import disparo.*
 import jugador.*
 import enemigos.*
 import juego.*
@@ -91,4 +91,4 @@ describe "Enemigo" {
 	
 		
 	
-}
+}*/

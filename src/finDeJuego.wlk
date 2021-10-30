@@ -4,8 +4,8 @@ import cartelNivel.*
 import juego.*
 
 object finDeJuego{
-	var property position = game.at(2,6)
-	var property image = "gameoverphrase.png"
+	var property position = game.at(4,6)
+	var property image = "gameover.jpg"
 	
 	method cargar(){
 		game.clear()

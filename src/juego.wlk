@@ -17,12 +17,14 @@ object juego {
 		nivel.disparosEnemigos()		 
 		
 		game.onTick(0, "moverDisparo",{ jugador.moverDisparo() })
+		game.onTick(5000, "combatir",{ nivel.combatir() })
+	
 		self.teclasJugador()
 		self.impactoEnJugador()
 	}
 	
 	method impactoEnJugador() {
-		game.whenCollideDo(jugador, { enemigoODisparoEnemigo => 
+		game.whenCollideDo(jugador, { enemigoODisparo => 
 			game.sound("explosion.wav").play()
 			finDeJuego.cargar()
 		})	
