@@ -5,22 +5,14 @@ import juego.*
 object jugador{
 	var property position = game.at(6,0)
 	var property image = "player.gif"
-	var disparo = null
+	var property disparo = null
 	
 	method disparar() {
 		if(disparo == null || !game.hasVisual(disparo)){
-			game.sound("disparo.wav").play()
+			//game.sound("disparo.wav").play()
 			disparo = new DisparoJugador(position = position.up(1), image = "shot1.gif")			
 			game.addVisual(disparo)		
 		}	  
-	}
-	
-	method disparo(){
-		return disparo
-	}
-	
-	method posicion(){
-		return position
 	}
 	
 	method moverPara(direccion) {

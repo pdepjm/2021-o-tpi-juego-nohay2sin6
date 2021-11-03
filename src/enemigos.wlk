@@ -17,9 +17,6 @@ class Enemigo{
 		}	
 	}
 	
-	method disparo(){
-		return disparo
-	}
 	method moverDisparo() {
 		if(game.hasVisual(disparo))
 			disparo.mover(disparo)
@@ -46,7 +43,7 @@ class Enemigo{
 
 class Enemigo1 inherits Enemigo{
 	
-	const mensajes = ["¡ A LA CARGA !", "¡ MORIRAS !", "¡ RINDETE !"]
+	const mensajes = ["¡A LA CARGA!", "¡MORIRAS!", "¡RINDETE!"]
 	
 	override method alCombate(){
 		game.say(self, mensajes.anyOne())
@@ -74,7 +71,7 @@ class Enemigo3 inherits Enemigo{
 		else{		
 			image = "ufo1.gif"			
 		}
-		game.sound("transformacion.wav").play()
+		//game.sound("transformacion.wav").play()
 	} 
 
 }
