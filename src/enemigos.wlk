@@ -1,5 +1,6 @@
 import disparo.*
 import wollok.game.*
+import finDeJuego.*
 import juego.*
 
 class Enemigo{
@@ -35,6 +36,9 @@ class Enemigo{
 				position = position.right(1)			
 			else{		
 				position = position.down(1)
+				if(position.y()==0){
+					finDeJuego.cargar()
+				}
 			}
 	}
 	

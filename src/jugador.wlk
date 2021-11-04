@@ -31,8 +31,8 @@ object jugador{
 	method moverDisparo() {
 		if(disparo != null && game.hasVisual(disparo))
 			disparo.mover(disparo)
-			self.impactarDisparo()
 			self.validarDisparo() 
+			self.impactarDisparo()
 	}
 	
 	method impactarDisparo() {

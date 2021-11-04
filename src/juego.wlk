@@ -61,7 +61,7 @@ object juego {
 	}
 	
 	method validarDificultad() {
-		 if(nivel.enemigos().size() < 10){
+		 if(nivel.cantidadEnemigos() < 10){
 				nivel.aumentarDificultad()
 		}	
 	}

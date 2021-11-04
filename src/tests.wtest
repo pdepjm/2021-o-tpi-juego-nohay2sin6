@@ -13,6 +13,7 @@ import wollok.game.*
 describe "Jugador" {
 	
 	test "al moverse hacia una dirección, el jugador actualiza su posición"{
+		jugador.position(game.at(6,0))
 		jugador.moverPara(derecha)
 		assert.equals(game.at(7,0), jugador.position())
 	}
