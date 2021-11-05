@@ -12,7 +12,8 @@ object jugador{
 		if(disparo == null || !game.hasVisual(disparo)){
 			soundProducer.sound("disparo.wav").play()
 			disparo = new DisparoJugador(position = position.up(1), image = "shot1.gif")			
-			game.addVisual(disparo)		
+			game.addVisual(disparo)
+			juego.impactoEnEnemigo()		
 		}	  
 	}
 	

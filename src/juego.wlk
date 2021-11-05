@@ -17,10 +17,8 @@ object juego {
 		nivel.cargarEnemigos()
 		nivel.disparosEnemigos()		 
 		
-		game.onTick(0, "moverDisparoJugador e ImpactoEnEnemigo",{ 
-			if(jugador.disparo() != null){jugador.disparo().mover()}
-			self.impactoEnEnemigo()
-		})
+		game.onTick(0, "moverDisparoJugador",{ 
+			if(jugador.disparo() != null){jugador.disparo().mover()}})
 		game.onTick(5000, "enemigosCombatir",{ nivel.combatir() })
 	
 		self.teclasJugador()
@@ -29,7 +27,7 @@ object juego {
 	
 	method impactoEnEnemigo() {
 		if(jugador.disparo() != null && game.hasVisual(jugador.disparo())){
-			game.whenCollideDo(jugador.disparo(), { enemigo => 
+			game.onCollideDo(jugador.disparo(), { enemigo => 
 				self.eliminarEnemigo(enemigo)
 				jugador.disparo().salirDeEscena()			
 				})		
@@ -38,7 +36,7 @@ object juego {
 	
 	
 	method impactoEnJugador() {
-		game.whenCollideDo(jugador, { enemigoODisparo => 
+		game.onCollideDo(jugador, { enemigoODisparo => 
 			soundProducer.sound("explosion.wav").play()
 			finDeJuego.cargar()
 		})	
