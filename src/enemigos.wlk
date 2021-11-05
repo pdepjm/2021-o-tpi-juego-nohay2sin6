@@ -19,17 +19,6 @@ class Enemigo{
 		}	
 	}
 	
-	method moverDisparo() {
-		if(game.hasVisual(disparo))
-			disparo.mover(disparo)
-			self.validarDisparo() 
-	}
-	
-	method validarDisparo() {
-		if(game.hasVisual(disparo))
-			disparo.validar() 
-	}
-	
 	method mover() {
 		if (position.y().even() && position.x() > posicionIzquierda)
 			position = position.left(1)

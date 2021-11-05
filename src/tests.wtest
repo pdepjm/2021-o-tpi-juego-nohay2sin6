@@ -59,7 +59,7 @@ describe "Enemigo 3" {
 	
 }
 
-describe "Disparo jugador"{
+/*describe "Disparo jugador"{
 	
 	const disparoJugador = new DisparoJugador(position = game.at(5,5), image = "shot1.gif")
 	
@@ -78,7 +78,7 @@ describe "Disparo jugador"{
 		assert.that(disparoJugador.fueraDeEscena())
 	}
 	
-}
+}*/
 
 describe "Disparo enemigo"{
 	

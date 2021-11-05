@@ -28,26 +28,4 @@ object jugador{
 			position = game.at(13,position.y())
 		}
 	}
-	
-	method moverDisparo() {
-		if(disparo != null && game.hasVisual(disparo))
-			disparo.mover(disparo)
-			self.validarDisparo() 
-			self.impactarDisparo()
-	}
-	
-	method impactarDisparo() {
-		if(disparo != null && game.hasVisual(disparo)){
-			game.whenCollideDo(disparo, { enemigo => 
-				juego.eliminarEnemigo(enemigo)
-				disparo.salirDeEscena()			
-				})		
-		}	
-	}
-	
-	method validarDisparo() {
-		if(disparo != null && game.hasVisual(disparo))
-		 	disparo.validar()
-	}
-		
 }

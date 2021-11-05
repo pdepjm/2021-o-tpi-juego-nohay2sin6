@@ -1,4 +1,5 @@
 import wollok.game.*
+import jugador.*
 
 class Disparo{
 	var property position
@@ -23,19 +24,27 @@ class Disparo{
 	}
 	
 	method fueraDeEscena()
-	method mover(disparo)
+	method mover()
 	
 }
 
 class DisparoJugador inherits Disparo{
 	
-	override method mover(disparo) { 
-		if(game.hasVisual(disparo)){
+	override method mover() { 
+		if(jugador.disparo() != null && game.hasVisual(self)){
 			position = position.up(1)
-			if (image.equals("shot1.gif"))
+			if (image.equals("shot1.gif")){
 				image = "shot2.gif"
-					else
-						image = "shot1.gif"
+			} else {
+				image = "shot1.gif"
+				}
+		}
+		self.validar()
+	}
+	
+	override method validar() {
+		if(jugador.disparo() != null && game.hasVisual(self)){
+			super()
 		}
 	}
 	
@@ -45,8 +54,17 @@ class DisparoJugador inherits Disparo{
 
 class DisparoEnemigo inherits Disparo{ 
 	
-	override method mover(disparo) {
-		position = position.down(1)	
+	override method mover() {
+		if(game.hasVisual(self)){
+			position = position.down(1)
+			self.validar()
+		}
+	}
+	
+	override method validar() {
+		if(game.hasVisual(self)){
+			super()
+		}
 	}
 	
 	override method fueraDeEscena() = position.y() < 0
