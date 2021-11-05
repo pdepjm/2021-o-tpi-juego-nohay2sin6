@@ -1,6 +1,7 @@
 import disparo.*
 import wollok.game.*
 import juego.*
+import sonido.*
 
 object jugador{
 	var property position = game.at(6,0)
@@ -9,7 +10,7 @@ object jugador{
 	
 	method disparar() {
 		if(disparo == null || !game.hasVisual(disparo)){
-			//game.sound("disparo.wav").play()
+			soundProducer.sound("disparo.wav").play()
 			disparo = new DisparoJugador(position = position.up(1), image = "shot1.gif")			
 			game.addVisual(disparo)		
 		}	  

@@ -11,11 +11,9 @@ class Nivel {
 	method cantidadEnemigos() = enemigos.size()
 	
 	method cargarEnemigos() {
-		enemigos.forEach { 
-			enemigo => game.addVisual(enemigo)
-		}
+		enemigos.forEach { enemigo => game.addVisual(enemigo) }
 		game.onTick(500, "moverDisparo",{ enemigos.forEach{ enemigo => enemigo.moverDisparo()} })
-		game.onTick(dificultad, "mover",{ enemigos.forEach{ enemigo => enemigo.mover()} })	
+		game.onTick(dificultad, "moverEnemigo",{ enemigos.forEach{ enemigo => enemigo.mover()} })	
 	}
 	
 	method combatir(){

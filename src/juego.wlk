@@ -4,6 +4,7 @@ import enemigos.*
 import wollok.game.* 
 import jugador.*
 import direcciones.*
+import sonido.*
 
 object juego {
 	var property puntuacion = 0
@@ -25,7 +26,7 @@ object juego {
 	
 	method impactoEnJugador() {
 		game.whenCollideDo(jugador, { enemigoODisparo => 
-			game.sound("explosion.wav").play()
+			soundProducer.sound("explosion.wav").play()
 			finDeJuego.cargar()
 		})	
 	}
@@ -38,7 +39,7 @@ object juego {
 	
 	method eliminarEnemigo(enemigo){
 		if(nivel.enemigos().contains(enemigo)){
-			game.sound("explosion.wav").play()
+			soundProducer.sound("explosion.wav").play()
 			puntuacion += enemigo.puntos()
 			nivel.removerEnemigo(enemigo)
 		}

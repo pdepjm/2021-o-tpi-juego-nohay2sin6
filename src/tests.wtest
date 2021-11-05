@@ -5,12 +5,15 @@ import juego.*
 import nivelDeJuego.*
 import direcciones.*
 import wollok.game.*
+import sonido.*
 
 // ESTAN COMENTADOS LOS SONIDOS YA QUE TENÍAMOS PROBLEMAS CON LOS TEST.
 // INTENTAMOS IMPLEMENTAR EL OBJETOS DE SONIDOS QUE NOS HABÍAN PASADO, PERO NO SUPIMOS COMO.
 // PREFERIMOS CONSULTARLO MEJOR EN LA DEFENSA, PARA SACARNOS BIEN LAS DUDAS.
 
 describe "Jugador" {
+	
+	method initialize(){soundProducer.provider(soundProviderMock)}
 	
 	test "al moverse hacia una dirección, el jugador actualiza su posición"{
 		jugador.position(game.at(6,0))
@@ -34,6 +37,8 @@ describe "Jugador" {
 describe "Enemigo 3" {
 	
 	const enemigo3 = new Enemigo3 (position = game.at(7,5), image = "ufo1.gif", posicionDerecha = 8, posicionIzquierda = 6, puntos = 150)
+	
+	method initialize(){soundProducer.provider(soundProviderMock)}
 	
 	test "el enemigo3 se pone alCombate y cambia de imagen" {
 		enemigo3.alCombate()

@@ -2,6 +2,7 @@ import disparo.*
 import wollok.game.*
 import finDeJuego.*
 import juego.*
+import sonido.*
 
 class Enemigo{
 	var property position
@@ -61,7 +62,7 @@ class Enemigo2 inherits Enemigo{
 	const comunicaciones = ["voz1.wav", "voz2.wav", "voz3.wav", "voz4.wav"]
 	
 	override method alCombate(){
-		game.sound(comunicaciones.anyOne()).play()
+		soundProducer.sound(comunicaciones.anyOne()).play()
 		game.say(self, "?#%)?!3#@:=?$")
 	}
 
@@ -75,7 +76,7 @@ class Enemigo3 inherits Enemigo{
 		else{		
 			image = "ufo1.gif"			
 		}
-		//game.sound("transformacion.wav").play()
+		soundProducer.sound("transformacion.wav").play()
 	} 
 
 }
