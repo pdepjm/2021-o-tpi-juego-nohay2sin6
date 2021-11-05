@@ -1,5 +1,4 @@
 import wollok.game.*
-import jugador.*
 
 class Disparo{
 	var property position
@@ -31,7 +30,7 @@ class Disparo{
 class DisparoJugador inherits Disparo{
 	
 	override method mover() { 
-		if(jugador.disparo() != null && game.hasVisual(self)){
+		if(self != null && game.hasVisual(self)){
 			position = position.up(1)
 			if (image.equals("shot1.gif")){
 				image = "shot2.gif"
@@ -43,7 +42,7 @@ class DisparoJugador inherits Disparo{
 	}
 	
 	override method validar() {
-		if(jugador.disparo() != null && game.hasVisual(self)){
+		if(self != null && game.hasVisual(self)){
 			super()
 		}
 	}

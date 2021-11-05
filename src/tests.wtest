@@ -13,7 +13,7 @@ import sonido.*
 
 describe "Jugador" {
 	
-	method initialize(){soundProducer.provider(soundProviderMock)}
+	method initialize() {soundProducer.provider(soundProviderMock)}
 	
 	test "al moverse hacia una dirección, el jugador actualiza su posición"{
 		jugador.position(game.at(6,0))
@@ -38,7 +38,7 @@ describe "Enemigo 3" {
 	
 	const enemigo3 = new Enemigo3 (position = game.at(7,5), image = "ufo1.gif", posicionDerecha = 8, posicionIzquierda = 6, puntos = 150)
 	
-	method initialize(){soundProducer.provider(soundProviderMock)}
+	method initialize() {soundProducer.provider(soundProviderMock)}
 	
 	test "el enemigo3 se pone alCombate y cambia de imagen" {
 		enemigo3.alCombate()
@@ -59,13 +59,13 @@ describe "Enemigo 3" {
 	
 }
 
-/*describe "Disparo jugador"{
+describe "Disparo jugador"{
 	
 	const disparoJugador = new DisparoJugador(position = game.at(5,5), image = "shot1.gif")
 	
 	test "el disparo del jugador se mueve hacia arriba"{
 		game.addVisual(disparoJugador)
-		disparoJugador.mover(disparoJugador)
+		disparoJugador.mover()
 		assert.equals(game.at(5,6), disparoJugador.position())
 	}
 	
@@ -78,7 +78,7 @@ describe "Enemigo 3" {
 		assert.that(disparoJugador.fueraDeEscena())
 	}
 	
-}*/
+}
 
 describe "Disparo enemigo"{
 	
@@ -86,7 +86,7 @@ describe "Disparo enemigo"{
 	
 	test "el disparo del enemigo se mueve hacia abajo"{
 		game.addVisual(disparoEnemigo)
-		disparoEnemigo.mover(disparoEnemigo)
+		disparoEnemigo.mover()
 		assert.equals(game.at(5,4), disparoEnemigo.position())
 	}
 	
