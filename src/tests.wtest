@@ -1,6 +1,101 @@
+import disparo.*
+import jugador.*
+import enemigos.*
+import juego.*
+import nivelDeJuego.*
+import direcciones.*
+import wollok.game.*
+import sonido.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "Jugador" {
+	
+	method initialize() {soundProducer.provider(soundProviderMock)}
+	
+	test "al moverse hacia una dirección, el jugador actualiza su posición"{
+		jugador.position(game.at(6,0))
+		jugador.moverPara(derecha)
+		assert.equals(game.at(7,0), jugador.position())
+	}
+	
+	test "El jugador no puede moverse fuera de los limites de la pantalla lateralmente"{
+		jugador.position(game.at(0,0))
+		jugador.moverPara(izquierda)
+		assert.equals(game.at(0,0), jugador.position())
+	}
+	
+	test "cuando el jugador dispara, el disparo existe"{
+		jugador.disparar()
+		assert.equals(game.at(6,1), jugador.disparo().position())
+		assert.equals("shot1.gif", jugador.disparo().image())
+	}
 }
+
+describe "Enemigo 3" {
+	
+	const enemigo3 = new Enemigo3 (position = game.at(7,5), image = "ufo1.gif", posicionDerecha = 8, posicionIzquierda = 6, puntos = 150)
+	
+	method initialize() {soundProducer.provider(soundProviderMock)}
+	
+	test "el enemigo3 se pone alCombate y cambia de imagen" {
+		enemigo3.alCombate()
+		assert.equals("ufo2.png", enemigo3.image())
+	}
+	
+	test "al moverse un enemigo, cambia su posición"{
+		enemigo3.mover()
+		assert.equals(game.at(8,5), enemigo3.position())
+	}
+	
+	test "cuando el enemigo dispara, el disparo existe"{
+		game.addVisual(enemigo3)
+		enemigo3.disparar()
+		assert.equals(game.at(7,4), enemigo3.disparo().position())
+		assert.equals("bomb.png", enemigo3.disparo().image())
+	}
+	
+}
+
+describe "Disparo jugador"{
+	
+	const disparoJugador = new DisparoJugador(position = game.at(5,5), image = "shot1.gif")
+	
+	test "el disparo del jugador se mueve hacia arriba"{
+		game.addVisual(disparoJugador)
+		disparoJugador.mover()
+		assert.equals(game.at(5,6), disparoJugador.position())
+	}
+	
+	test "el disparo del jugador no está fuera de escena"{
+		assert.notThat(disparoJugador.fueraDeEscena())
+	}
+	
+	test "el disparo del jugador está fuera de escena"{
+		disparoJugador.position(game.at(5,14))
+		assert.that(disparoJugador.fueraDeEscena())
+	}
+	
+}
+
+describe "Disparo enemigo"{
+	
+	const disparoEnemigo = new DisparoEnemigo(position = game.at(5,5), image = "bomb.png")
+	
+	test "el disparo del enemigo se mueve hacia abajo"{
+		game.addVisual(disparoEnemigo)
+		disparoEnemigo.mover()
+		assert.equals(game.at(5,4), disparoEnemigo.position())
+	}
+	
+	test "el disparo del enemigo no está fuera de escena"{
+		assert.notThat(disparoEnemigo.fueraDeEscena())
+	}
+	
+	test "el disparo del enemigo está fuera de escena"{
+		disparoEnemigo.position(game.at(5,-1))
+		assert.that(disparoEnemigo.fueraDeEscena())
+	}
+}
+
+	
+	
+	
