@@ -7,10 +7,6 @@ import direcciones.*
 import wollok.game.*
 import sonido.*
 
-// ESTAN COMENTADOS LOS SONIDOS YA QUE TENÍAMOS PROBLEMAS CON LOS TEST.
-// INTENTAMOS IMPLEMENTAR EL OBJETOS DE SONIDOS QUE NOS HABÍAN PASADO, PERO NO SUPIMOS COMO.
-// PREFERIMOS CONSULTARLO MEJOR EN LA DEFENSA, PARA SACARNOS BIEN LAS DUDAS.
-
 describe "Jugador" {
 	
 	method initialize() {soundProducer.provider(soundProviderMock)}
